@@ -1,4 +1,6 @@
+using System.Runtime.InteropServices;
 using Fighters.Models.Armors;
+using Fighters.Models.Classes;
 using Fighters.Models.Races;
 using Fighters.Models.Weapons;
 
@@ -6,34 +8,62 @@ namespace Fighters.Models.Fighters
 {
     public class Fighter : IFighter
     {
-        public int MaxHealth => Race.Health;
-        public int CurrentHealth { get; private set; }
-
         public string Name { get; }
-
+        public int MaxHealth => Race.Health + Class.Health;
+        public int FullArmor => Race.Armor + Armor.Armor;
+        public int Initiative => Race.Initiative + Class.Initiative;
+        public int CurrentHealth { get; private set; }
+        
         public IRace Race { get; }
-        public IWeapon Weapon { get; private set; } = new NoWeapon();
-        public IArmor Armor { get; private set; } = new NoArmor();
+        public IWeapon Weapon { get; } 
+        public IArmor Armor { get;}
+        public IClass Class { get; }
 
-        public Fighter( string name, IRace race )
+        public Fighter( string name, IWeapon weapon, IRace race, IArmor armor, IClass playerClass)
         {
             Name = name;
+            Weapon = weapon;
             Race = race;
+            Armor = armor;
+            Class = playerClass;
             CurrentHealth = MaxHealth;
         }
+        public Fighter(){}
 
         public int CalculateDamage()
         {
-            return Race.Damage + Weapon.Damage;
+            Random random = new Random();
+            int fullDamage = Race.Damage + Class.Damage + Weapon.Damage;
+            double randDamage = random.Next(80, 111) / 100d;
+            double resulDamage = fullDamage * randDamage;
+            if (random.NextDouble() < 0.5)
+            {
+                return (int)(resulDamage * 3);
+            }
+            else
+            {
+                return (int)(resulDamage);
+            }
         }
-
+        
         public void TakeDamage(int damage)
         {
-            CurrentHealth -= damage;
+            CurrentHealth -= Math.Max(damage - FullArmor, 0);
             if (CurrentHealth < 0)
             {
                 CurrentHealth = 0;
             }
         }
+        public void FighterInfo()
+        {
+            Console.WriteLine($"Name: {Name}" +
+                              $"ClassName: {Class.Name}" +
+                              $"Race: {Race.Name}" +
+                              $"Armor: {Armor.Name}" +
+                              $"Weapon: {Weapon.Name} " +
+                              $"Initiative: {Initiative} " +
+                              $"Health: {MaxHealth}");
+        }
+
     }
 }

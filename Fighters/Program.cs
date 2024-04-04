@@ -8,8 +8,8 @@ namespace Fighters
     {
         public static void Main()
         {
-            var firstFighter = new Fighter( "Jane", new Human() );
-            var secondFighter = new Fighter( "Viktor", new Human() );
+            var firstFighter = new Fighter( );
+            var secondFighter = new Fighter( );
 
             var master = new GameMaster();
             var winner = master.PlayAndGetWinner( firstFighter, secondFighter );
