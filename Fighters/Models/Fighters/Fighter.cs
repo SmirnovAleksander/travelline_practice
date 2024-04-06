@@ -28,7 +28,6 @@ namespace Fighters.Models.Fighters
             Class = playerClass;
             CurrentHealth = MaxHealth;
         }
-        public Fighter(){}
 
         public int CalculateDamage()
         {
@@ -36,7 +35,7 @@ namespace Fighters.Models.Fighters
             int fullDamage = Race.Damage + Class.Damage + Weapon.Damage;
             double randDamage = random.Next(80, 111) / 100d;
             double resulDamage = fullDamage * randDamage;
-            if (random.NextDouble() < 0.5)
+            if (random.NextDouble() < 0.3)
             {
                 return (int)(resulDamage * 3);
             }
@@ -56,13 +55,7 @@ namespace Fighters.Models.Fighters
         }
         public void FighterInfo()
         {
-            Console.WriteLine($"Name: {Name}" +
-                              $"ClassName: {Class.Name}" +
-                              $"Race: {Race.Name}" +
-                              $"Armor: {Armor.Name}" +
-                              $"Weapon: {Weapon.Name} " +
-                              $"Initiative: {Initiative} " +
-                              $"Health: {MaxHealth}");
+            Console.WriteLine($"________________\nName: {Name}\nClassName: {Class.Name}\nRace: {Race.Name}\nArmor: {Armor.Name}\nWeapon: {Weapon.Name}\nInitiative: {Initiative}\nHealth: {MaxHealth}\n________________");
         }
 
     }

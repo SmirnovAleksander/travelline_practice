@@ -2,7 +2,7 @@
 {
     public class Elf : IRace
     {
-        public string Name { get; } = "Elf";
+        public string Name { get; } = "Эльф";
         public int Damage { get; } = 8;
         public int Health { get; } = 80;
         public int Armor { get; } = 5;
