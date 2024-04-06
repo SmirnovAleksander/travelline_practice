@@ -1,3 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using CarFactory.Models.Cars;
 
-Console.WriteLine("Hello, World!");
+namespace CarFactory;
+
+public class Program
+{
+    public static void Main()
+    {
+        var newCar = new Car(CreateCars.CarName(), 
+            CreateCars.CreateBrand(), 
+            CreateCars.CreateColor(), 
+            CreateCars.CreateShape(), 
+            CreateCars.CreateEngine(), 
+            CreateCars.CreateSteeringPosition(), 
+            CreateCars.CreateTransmission());
+        Console.WriteLine($"Ваша машина: {newCar.Name}");
+        newCar.CarInfo();
+        double resultSpeed = newCar.CalculateMaxSpeed();
+        Console.WriteLine($"Максимальная скорость автомобиля {newCar.Name}: {resultSpeed}");
+    }
+    
+}
