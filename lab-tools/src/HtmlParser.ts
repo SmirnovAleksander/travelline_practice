@@ -1,7 +1,7 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 import { parse, HTMLElement } from "node-html-parser";
 
-const HtmlParser = (htmlFilePath: string): string[] => {
+export const HtmlParser = (htmlFilePath: string): string[] => {
   const htmlFile: string = fs.readFileSync(htmlFilePath, "utf8");
   const resources: string[] = parse(htmlFile)
     .querySelectorAll("[src], [href]")
@@ -16,6 +16,3 @@ const HtmlParser = (htmlFilePath: string): string[] => {
   return resources;
 }
 
-const htmlFilePath: string = process.argv[2];
-const resources: string[] = HtmlParser(htmlFilePath);
-console.log(resources);
