@@ -23,7 +23,6 @@ const isJsonObject = (value: unknown): value is Record<string, unknown> =>
 //     isJsonObject(value1) && isJsonObject(value2);
 
 const JsonDifference = (oldJson: Record<string, unknown>, newJson: Record<string, unknown>): JsonResult => {
-    // const keys: string[] = Array.from(new Set([...Object.keys(oldJson), ...Object.keys(newJson)]))
     const keys: string[] = [...Object.keys(oldJson), ...Object.keys(newJson)] 
 
     return keys.reduce<JsonResult>((JsonResult: JsonResult, key: string) => {
